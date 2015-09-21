@@ -10,6 +10,7 @@ get '/songs' do
 end
 
 get '/songs/new' do
+  @song = Song.new
   erb :'songs/new'
 end
 
