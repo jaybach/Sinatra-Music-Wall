@@ -5,5 +5,6 @@ end
 
 get '/songs' do
   # "Add a song!"
+  @songs = Song.all
   erb :'songs/songs'
 end
