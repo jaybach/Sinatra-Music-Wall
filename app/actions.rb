@@ -22,3 +22,8 @@ post '/songs' do
   @song.save
   redirect'/songs'
 end
+
+get '/songs/:id' do
+  @song = Song.find params[:id]
+  erb :'songs/show'
+end
