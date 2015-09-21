@@ -12,3 +12,13 @@ end
 get '/songs/new' do
   erb :'songs/new'
 end
+
+post '/songs' do
+  @song = Song.new(
+    song_title: params[:song_title],
+    author: params[:author],
+    url: params[:url]
+    )
+  @song.save
+  redirect'/songs'
+end
