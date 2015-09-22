@@ -21,7 +21,7 @@
   <nav>
     <div id="user">
       <% if @user %>
-        <p><%= @user.name %> | <a href="/users/logout">Log out</a></p>
+        <p>Hi, <%= @user.name %> | <a href="/users/logout">Log out</a></p>
       <% else %>
         <p><a href="/users/login">Log in</a></p>
       <% end %>

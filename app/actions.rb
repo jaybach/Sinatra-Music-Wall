@@ -93,3 +93,8 @@ post '/users/login' do
   redirect '/songs'
 end
 
+get '/users/logout' do
+  session.clear
+  redirect '/songs'
+end
+
