@@ -1,3 +1,5 @@
+require 'pry'
+
 helpers do
   def current_user
     @user = User.find(session[:user_id]) if session[:user_id]
@@ -97,6 +99,14 @@ end
 
 get '/users/logout' do
   session.clear
+  redirect '/songs'
+end
+
+post '/songs/votes/:id' do
+  @song = Song.find params[:id]
+  vote = Vote.find_by(song_id: @song.id)
+  binding.pry
+  vote.total += 1
   redirect '/songs'
 end
 

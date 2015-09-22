@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922021632) do
+ActiveRecord::Schema.define(version: 20150922202852) do
 
   create_table "songs", force: :cascade do |t|
     t.string   "song_title"
@@ -30,5 +30,14 @@ ActiveRecord::Schema.define(version: 20150922021632) do
     t.datetime "updated_at"
     t.integer  "age"
   end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "song_id"
+    t.integer "user_id"
+    t.integer "total",   default: 0
+  end
+
+  add_index "votes", ["song_id"], name: "index_votes_on_song_id"
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
 
 end
