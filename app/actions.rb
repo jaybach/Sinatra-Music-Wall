@@ -1,9 +1,29 @@
+helpers do
+  def current_user
+    @user = User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def get_error
+    if session[:error]
+      @error = session[:error]
+      session[:error] = nil
+    end
+  end
+end
+
+before do
+  current_user
+  get_error
+end
+
+
+
 # Homepage (Root path)
 get '/' do
   if session[:user_id]
     @user = User.find(session[:user_id])
   end
-  erb :songs
+  erb :'songs'
 end
 
 get '/songs' do
@@ -66,8 +86,8 @@ post '/users/login' do
 
   if user
     session[:user_id] = user.id
-  else
-    session[:error] = "Sorry, but we were unable to log you in"
+  # else
+  #   session[:error] = "Sorry, but we were unable to log you in"
   end
 
   redirect '/songs'
