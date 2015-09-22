@@ -1,5 +1,8 @@
 # Homepage (Root path)
 get '/' do
+  if session[:user_id]
+    @user = User.find(session[:user_id])
+  end
   erb :songs
 end
 
@@ -49,5 +52,24 @@ post '/users/register' do
   else
     erb :'/users/register'
   end
+end
+
+get '/users/login' do
+  erb :'users/login'
+end
+
+post '/users/login' do
+  name = params[:name]
+  password = params[:password]
+
+  user = User.find_by(name: name, password: password)
+
+  if user
+    session[:user_id] = user.id
+  else
+    session[:error] = "Sorry, but we were unable to log you in"
+  end
+
+  redirect '/songs'
 end
 
