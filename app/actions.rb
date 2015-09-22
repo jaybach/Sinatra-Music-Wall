@@ -1,12 +1,12 @@
 # Homepage (Root path)
 get '/' do
-  erb :index
+  erb :songs
 end
 
 get '/songs' do
   # "Add a song!"
   @songs = Song.all
-  erb :'songs/index'
+  erb :'songs/songs'
 end
 
 get '/songs/new' do

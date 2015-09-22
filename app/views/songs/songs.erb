@@ -7,6 +7,7 @@
 <% @songs.each do |song| %>
   <div class="song">
     <h3><a href="/songs/<%= song.id%>"><%= song.song_title %> <small>(by: <%= song.author %>)</small></a></h3>
+    <h5><input type="submit" value="Vote">  current score: <%= song.votes %></h5>
     <p> <%= song.url %></p>
   </div>
 <% end %>
