@@ -19,6 +19,10 @@ before do
 end
 
 
+configure do
+  enable :sessions
+end
+
 
 # Homepage (Root path)
 get '/' do
@@ -35,15 +39,21 @@ get '/songs' do
 end
 
 get '/songs/new' do
-  @song = Song.new
-  erb :'songs/new'
+  user = session[:user_id]
+  if user
+    @song = Song.new
+    erb :'songs/new'
+  else
+    session[:error] = "Must be logged in to post a song"
+  end
 end
 
 post '/songs' do
   @song = Song.new(
     song_title: params[:song_title],
     author: params[:author],
-    url: params[:url]
+    url: params[:url],
+    user_id: session[:user_id]
     )
   if @song.save
     redirect'/songs'
