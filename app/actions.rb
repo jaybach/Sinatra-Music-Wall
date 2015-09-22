@@ -6,7 +6,7 @@ end
 get '/songs' do
   # "Add a song!"
   @songs = Song.all
-  erb :'songs/songs'
+  erb :'songs/index'
 end
 
 get '/songs/new' do
@@ -38,8 +38,12 @@ get '/users/register' do
 end
 
 post '/users/register' do
-  @user = User.new
-  erb :'users/register'
+  @user = User.new(
+    name: params[:name],
+    email: params[:email],
+    password: params[:password]
+  )
+  # erb :'users/register'
   if @user.save
     redirect '/songs'
   else
