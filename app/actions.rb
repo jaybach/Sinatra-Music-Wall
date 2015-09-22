@@ -102,11 +102,11 @@ get '/users/logout' do
   redirect '/songs'
 end
 
-post '/songs/votes/:id' do
-  @song = Song.find params[:id]
-  vote = Vote.find_by(song_id: @song.id)
-  binding.pry
-  vote.total += 1
-  redirect '/songs'
-end
+# post '/songs/votes/:id' do
+#   @song = Song.find params[:id]
+#   vote = Vote.find_by(song_id: @song.id)
+#   binding.pry
+#   vote.total += 1
+#   redirect '/songs'
+# end
 

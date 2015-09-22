@@ -1,0 +1,29 @@
+total votes: <%= Vote.joins(:total).where("vote.song_id = song.id") %>
+
+
+
+<% @songs.each do |song| %>
+  <div class="song">
+    <h3><a href="/songs/<%= song.id %>"><%= song.song_title %> <small>(by: <%= song.author %>)</small></a></h3>
+    <h5><form method="post" action="/songs/votes/<%= song.id %>"><input type="hidden" name="song_id" value="<%= song.id %>"><input type="submit" value="Vote"></form>  total votes: <%= Vote.find_by_sql("SELECT v.total FROM votes AS v, songs AS s WHERE v.song_id=s.id") %></h5>
+    <p> <%= song.url %></p>
+  </div>
+<% end %>
+
+
+
+
+<% @songs.each do |song| %>
+  <div class="song">
+    <h3><a href="/songs/<%= song.id %>"><%= song.song_title %> <small>(by: <%= song.author %>)</small></a></h3>
+    <h6>posted by:  <%= @user.id %></h6>
+    <h5><form method="post" action="/songs/votes/<%= song.id %>"><input type="hidden" name="song_id" value="<%= song.id %>"><input type="submit" value="Vote"></form>  total votes: <%= Vote.find_by_sql("SELECT v.total FROM votes AS v, songs AS s WHERE v.song_id=s.id") %></h5>
+    <p> <%= song.url %></p>
+  </div>
+<% end %>
+
+
+
+<div>
+    <input type="hidden" name="user_id" value="<%= @user.id %>">
+    </div>
