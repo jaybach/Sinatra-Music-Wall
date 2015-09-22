@@ -86,11 +86,13 @@ post '/users/login' do
 
   if user
     session[:user_id] = user.id
-  # else
-  #   session[:error] = "Sorry, but we were unable to log you in"
+    redirect '/songs'
+  else
+    # erb :'/users/login'
+    session[:error] = "Invalid user name or password"
+    erb :'/users/login'
   end
-
-  redirect '/songs'
+  # redirect '/songs'
 end
 
 get '/users/logout' do

@@ -1,5 +1,8 @@
-<% if @error %>
-  <div class="error"><%= @error %></div>div>
+<% if session[:error] %>
+  <div>
+    <strong>Sorry, but we were unable to log you in</strong>
+      <p><%= session[:error] %></p>
+  </div>
 <% end %>
 
 <form method="post" action="/users/login">
