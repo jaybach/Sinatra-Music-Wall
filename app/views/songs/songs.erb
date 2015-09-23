@@ -1,5 +1,3 @@
-<!-- <h2>Add a song!</h2> -->
-
 <h2><a href="/songs/new">Add a song!</a></h2> <h4>Log in to add and vote for songs.</h4>
 
 <h5><a href="/users/register">Register for an account</a> or <a href="/users/login">log in</h5>
@@ -8,7 +6,11 @@
   <div class="song">
     <h3><a href="/songs/<%= song.id %>"><%= song.song_title %> <small>(by: <%= song.author %>)</small></a></h3>
     <h6>posted by: <%= User.find(song.user_id).name %></h6>
-    <h5><% if session[:user_id] %><form method="post" action="/songs/votes/<%= song.id %>"><input type="hidden" name="song_id" value="<%= song.id %>"><input type="submit" value="Vote"></form><% end %>  total votes: <%= song.votes.count %>
+    <h5>
+    <% if session[:user_id] && !Vote.find_by(user_id: current_user.id, song_id: song.id).present? %> 
+    <form method="post" action="/songs/votes/<%= song.id %>"><input type="hidden" name="song_id" value="<%= song.id %>"><input type="submit" value="Vote"></form>
+    <% end %>  
+    total votes: <%= song.votes.count %>
     </h5>
     <p> <%= song.url %></p>
   </div>
@@ -16,3 +18,14 @@
 
 <!-- Vote.find_by_sql("SELECT v.total FROM votes AS v, songs AS s WHERE v.song_id=s.id") -->
 
+<!-- if song.user_id == session[:user_id] && song.votes
+if song.find(user.id).votes == 0 -->
+<!-- if session[:user_id] != vote.user_id
+
+(vote.user_id != session[:user_id])
+
+Vote.find_by_sql("SELECT user_id FROM votes WHERE song_id == @song.id")
+
+Vote.find_by_sql("SELECT votes.user_id FROM votes, songs WHERE votes.song_id == songs.id")
+
+if session[:user_id] && (session[:user_id] != Vote.find_by_sql("SELECT votes.user_id FROM votes, songs WHERE votes.song_id == songs.id"))

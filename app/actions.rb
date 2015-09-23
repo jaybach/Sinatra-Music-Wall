@@ -119,7 +119,7 @@ post '/songs/votes/:id' do
   # Song => [:Vote, :Vote, :Vote]
   vote = Vote.find_by(song_id: @song.id)
   vote.total += 1
-  binding.pry
+  vote.user_id = current_user.id
   redirect '/songs'
 end
 
