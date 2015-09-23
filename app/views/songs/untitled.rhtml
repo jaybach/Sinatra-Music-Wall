@@ -1,5 +1,23 @@
+
+<%= Vote.find_by_sql("SELECT v.total FROM votes AS v, songs AS s WHERE v.song_id=s.id") %>
+
+Vote.find(votes.song_id).total
+
+
+
+
+    <h6>posted by: <%= @user.id %></h6>
+
+
+
 total votes: <%= Vote.joins(:total).where("vote.song_id = song.id") %>
 
+
+
+
+  <div>
+    <input type="hidden" name="user_name" value="<%= poster = @user.name %>" required>
+  </div>
 
 
 <% @songs.each do |song| %>

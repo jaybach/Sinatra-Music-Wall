@@ -112,11 +112,14 @@ get '/users/logout' do
   redirect '/songs'
 end
 
-# post '/songs/votes/:id' do
-#   @song = Song.find params[:id]
-#   vote = Vote.find_by(song_id: @song.id)
-#   binding.pry
-#   vote.total += 1
-#   redirect '/songs'
-# end
+post '/songs/votes/:id' do
+  @song = Song.find params[:id]
+  vote = @song.votes.create(song_id: @song.id, user_id: current_user.id)
+  # at this point, above, we have created a new Vote object that is associated with our Parent Song. 
+  # Song => [:Vote, :Vote, :Vote]
+  vote = Vote.find_by(song_id: @song.id)
+  vote.total += 1
+  binding.pry
+  redirect '/songs'
+end
 
